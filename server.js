@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 
 // Load DB config
-const config = require('./config/_config'); // Update this path if your config is elsewhere
+const config = require('./config/_config'); // Make sure this file exports { dbUrl: "your_mongodb_uri" }
 
 // Routes
 let index = require('./routes/index');
@@ -37,6 +37,13 @@ app.use('/image', image);
 
 // ======= SERVER =======
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`🚀 Server is listening at http://localhost:${PORT}`);
-});
+
+// Only start the server if this script is run directly (not imported during tests)
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`🚀 Server is listening at http://localhost:${PORT}`);
+    });
+}
+
+// Export the app for testing
+module.exports = app;

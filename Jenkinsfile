@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'Node16' // You must have this configured in Jenkins > Global Tool Configuration
+        nodejs 'Node16' // Ensure Node.js is configured in Jenkins > Global Tool Configuration
     }
 
     environment {
-        RENDER_DEPLOY_URL = 'https://your-app.onrender.com' // Update this with your Render URL
-        SLACK_CHANNEL = '#Austin_IP1' // Replace with your Slack channel
+        RENDER_DEPLOY_URL = 'https://my-ip-28ez.onrender.com' // Update this with your actual Render URL
+        SLACK_CHANNEL = '#Austin_IP1' // Replace with your actual Slack channel
     }
 
     stages {
@@ -17,15 +17,15 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('Test') {
             steps {
                 sh 'npm test'
             }
             post {
                 failure {
-                    mail to: 'you@example.com',
-                         subject: "❌ Test Failure: Build #${env.BUILD_NUMBER}",
-                         body: "Tests failed. Please check the Jenkins console output."
+                    mail to: 'cutleraustin5@gmail.com',
+                         subject: "❌ Tests Failed: Build #${env.BUILD_NUMBER}",
+                         body: "Check Jenkins build logs for more details."
                 }
             }
         }
@@ -33,10 +33,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Simulate deployment to Render'
-                // Option 1: Use Render auto-deploy from GitHub, no script needed
-                // Option 2: If webhook-based, trigger it via curl
+                // Uncomment one of the below depending on how Render deploys
+                // Option 1: Auto-deploy via GitHub - no action needed
+                // Option 2: Webhook trigger
                 // sh 'curl -X POST https://api.render.com/deploy/some-hook'
-                echo "Deployment triggered (manually or by webhook)."
+                echo "Deployment triggered (manually or via webhook)."
             }
         }
     }
@@ -57,6 +58,6 @@ pipeline {
     }
 
     triggers {
-        pollSCM('H/5 * * * *') // Poll GitHub every 5 minutes (replace with webhook for efficiency)
+        pollSCM('H/5 * * * *') // Poll GitHub every 5 minutes — switch to webhook for efficiency
     }
 }
