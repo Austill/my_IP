@@ -1,0 +1,7 @@
+const assert = require('assert');
+
+describe('Math', function () {
+  it('should add numbers correctly', function () {
+    assert.strictEqual(2 + 3, 5);
+  });
+});
