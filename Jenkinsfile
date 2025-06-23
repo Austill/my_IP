@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         RENDER_DEPLOY_URL = 'https://my-ip-28ez.onrender.com' // Update this with your actual Render URL
-        SLACK_CHANNEL = '#Austin_IP1' // Replace with your actual Slack channel
+        SLACK_CHANNEL = '#cutleraustin5' // Replace with your actual Slack channel
     }
 
     stages {
