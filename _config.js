@@ -8,3 +8,5 @@ config.mongoURI = {
 }
 module.exports = config;
 
+
+// mongodb+srv://austin:Misarobt1@cluster1.ynxgjwq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1
