@@ -105,18 +105,33 @@ pipeline {
     }
 
     post {
-        success {
-            slackSend (
-                channel: "${env.SLACK_CHANNEL}",
-                message: "✅ SUCCESS: Build #${env.BUILD_NUMBER} is deployed: ${env.RENDER_DEPLOY_URL}"
-            )
-        }
-        failure {
-            slackSend (
-                channel: "${env.SLACK_CHANNEL}",
-                message: "❌ FAILURE: Build #${env.BUILD_NUMBER}. Please check Jenkins logs."
-            )
-        }
+        always(
+            script{
+                if{ currentBuild.result == 'SUCCESS' } {
+                    slackSend (
+                        channel: "${env.SLACK_CHANNEL}",
+                        message: "✅ SUCCESS: Build #${env.BUILD_NUMBER} is deployed at ${env.RENDER_DEPLOY_URL}"
+                    )
+                } else {
+                    slackSend (
+                        channel: "${env.SLACK_CHANNEL}",
+                        message: "❌ FAILURE: Build #${env.BUILD_NUMBER}. Please check Jenkins logs."
+                    )
+                }
+            }
+        )
+        // success {
+        //     slackSend (
+        //         channel: "${env.SLACK_CHANNEL}",
+        //         message: "✅ SUCCESS: Build #${env.BUILD_NUMBER} is deployed: ${env.RENDER_DEPLOY_URL}"
+        //     )
+        // }
+        // failure {
+        //     slackSend (
+        //         channel: "${env.SLACK_CHANNEL}",
+        //         message: "❌ FAILURE: Build #${env.BUILD_NUMBER}. Please check Jenkins logs."
+        //     )
+        // }
     }
 
     triggers {
