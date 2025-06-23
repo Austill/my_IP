@@ -105,7 +105,7 @@ pipeline {
     }
 
     post {
-        always(
+        always{
             script{
                 if{ currentBuild.result == 'SUCCESS' } {
                     slackSend (
@@ -116,7 +116,7 @@ pipeline {
                     slackSend (
                         channel: "${env.SLACK_CHANNEL}",
                         message: "❌ FAILURE: Build #${env.BUILD_NUMBER}. Please check Jenkins logs."
-                    )
+                }
                 }
             }
         )
@@ -134,7 +134,7 @@ pipeline {
         // }
     }
 
-    triggers {
-        pollSCM('H/5 * * * *') // Poll GitHub every 5 minutes
-    }
+    // triggers {
+    //     pollSCM('H/5 * * * *') // Poll GitHub every 5 minutes
+    // }
 }
