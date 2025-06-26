@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'master', url: 'https://github.com/GMurira/gallery.git'
+                git branch: 'master', url: 'https://github.com/Austill/my_IP.git'
             }
         }
 
@@ -28,7 +28,7 @@ pipeline {
                     emailext(
                         subject: "Jenkins Build #${env.BUILD_NUMBER} Failed",
                         body: "Build failed during tests. Please check Jenkins logs for more details.",
-                        to: 'geoffrey.murira@student.moringaschool.com'
+                        to: 'cutleraustin5@gmail.com'
                     )
                     error('Tests did not pass.')
                 }
@@ -41,7 +41,7 @@ pipeline {
         stage('Deploy to Render') {
             steps {
                 echo 'Deploy to render'
-                sh "curl -X POST https://api.render.com/deploy/srv-d1c3remr433s7382lm6g?key=zCmG31MN5Do"
+                sh "curl -X POST https://api.render.com/deploy/srv-d1bfj7er433s739ir9jg?key=5ATnSjZh2qk"
             }
             post {
                 success {
@@ -49,11 +49,12 @@ pipeline {
                         channel: '#all-austinip1',
                         color: 'good',
                         message: "Deployment Successful! Build #${env.BUILD_NUMBER} deployed: https://my-ip-28ez.onrender.com",
-                        teamDomain: 'Murira',
+                        teamDomain: 'austin_ip1',
                         tokenCredentialId: 'slack-bot',
                         botUser: true
                     )
-                }
+                    }
+                        }   
         }
     }
 
@@ -67,4 +68,3 @@ pipeline {
     }
 }
 
-}
