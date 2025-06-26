@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build hello') {
             steps {
-                echo 'Hello world'
+                echo 'Hello worldd'
                 // Add your build commands here
             }
         }
