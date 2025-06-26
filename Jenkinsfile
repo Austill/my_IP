@@ -173,7 +173,7 @@ pipeline {
             slackSend (
                 channel: "${env.SLACK_CHANNEL}",
                 color: 'good',
-                message: "✅ SUCCESS: Build #${env.BUILD_NUMBER} is live at ${env.RENDER_DEPLOY_URL}"
+                message: " SUCCESS: Build #${env.BUILD_NUMBER} is live at ${env.RENDER_DEPLOY_URL}"
             )
         }
 
@@ -181,11 +181,11 @@ pipeline {
             slackSend (
                 channel: "${env.SLACK_CHANNEL}",
                 color: 'danger',
-                message: "❌ FAILURE: Build #${env.BUILD_NUMBER}. Check Jenkins for logs."
+                message: "FAILURE: Build #${env.BUILD_NUMBER}. Check Jenkins for logs."
             )
 
             mail to: 'cutleraustin@gmail.com',
-                 subject: "❌ Build Failed: #${env.BUILD_NUMBER}",
+                 subject: " Build Failed: #${env.BUILD_NUMBER}",
                  body: "Your Jenkins build has failed.\n\nView details in Jenkins for debugging."
         }
 

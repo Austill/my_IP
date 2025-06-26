@@ -50,7 +50,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// === POST /upload ===
 router.post('/upload', upload.single('image'), (req, res) => {
     const image = new Image({
         name: req.body.name || 'Untitled',
@@ -66,7 +65,6 @@ router.post('/upload', upload.single('image'), (req, res) => {
     });
 });
 
-// === GET /:id ===
 router.get('/:id', (req, res) => {
     Image.findById(req.params.id, function (err, image) {
         if (err) console.log(err);
@@ -74,7 +72,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// === PUT /:id ===
+
 router.put('/:id', (req, res) => {
     Image.findOneAndUpdate(
         { _id: req.params.id },
@@ -87,7 +85,7 @@ router.put('/:id', (req, res) => {
     );
 });
 
-// === DELETE /:id ===
+
 router.delete('/:id', (req, res) => {
     Image.deleteOne({ _id: req.params.id }, function (err) {
         if (err) console.log(err);
