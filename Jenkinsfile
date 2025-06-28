@@ -27,7 +27,7 @@ pipeline {
                     echo 'Tests failed.'
                     emailext(
                         subject: "Jenkins Build #${env.BUILD_NUMBER} Failed",
-                        body: "Build failed during tests. Please check Jenkins logs for more details.",
+                        body: "Build failed during tests. Please check the Jenkins logs for more details.",
                         to: 'cutleraustin5@gmail.com'
                     )
                     error('Tests did not pass.')
