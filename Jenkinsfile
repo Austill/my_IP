@@ -50,7 +50,7 @@ pipeline {
                         color: 'good',
                         message: "Deployment Successful! Build #${env.BUILD_NUMBER} deployed: https://my-ip-28ez.onrender.com",
                         teamDomain: 'austin_ip1',
-                        tokenCredentialId: 'slack-bot',
+                        tokenCredentialId: 'slack-ID',
                         botUser: true
                     )
                     }
